@@ -1,0 +1,183 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #f4f6f9;
+  color: #333333;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  margin: 0;
+  padding: 20px 0; 
+}
+
+#jspsych-experiment {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  max-width: 900px;
+  margin: 0 auto;
+  background-color: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1); 
+}
+
+p, ul {
+  padding: 10px 20px;
+  line-height: 1.6; 
+  font-size: 1.1rem;
+}
+
+h2 {
+  padding: 20px; 
+  margin-bottom: 20px;
+  line-height: 1.4;
+}
+
+ul {
+  padding-left: 40px; 
+}
+
+button, .jspsych-btn {
+  margin-top: 20px; 
+}
+
+.jspsych-content-wrapper {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.jspsych-instructions {
+  max-width: 800px;
+  text-align: center;
+  padding: 30px;
+  font-size: 1.2rem;
+  line-height: 1.8;
+  color: #4a4a4a;
+}
+
+.jspsych-content {
+  font-size: 1.8rem;
+  text-align: center;
+  color: #333333;
+  padding: 20px 0;
+}
+
+.small-word {
+  font-size: 2rem;
+}
+
+.large-word {
+  font-size: 8rem;
+}
+
+button, .jspsych-btn {
+  background-color: #4a90e2;
+  color: #ffffff;
+  border: none;
+  padding: 15px 30px;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s ease-in-out;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+button:hover, .jspsych-btn:hover {
+  background-color: #357ab8;
+  transform: translateY(-2px);
+}
+
+input[type="text"], textarea {
+  width: 100%;
+  max-width: 600px;
+  padding: 15px;
+  margin: 10px auto;
+  border: 1px solid #dcdcdc;
+  border-radius: 5px;
+  font-size: 1rem;
+  background-color: #f9f9f9;
+  color: #333333;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+input[type="text"]:focus, textarea:focus {
+  border-color: #4a90e2;
+  outline: none;
+}
+
+.jspsych-survey-text-question {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+label {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  cursor: pointer;
+  line-height: 1.5; 
+}
+
+label input[type="checkbox"] {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #4a90e2;
+  border-radius: 4px;
+  margin-right: 10px;
+  position: relative;
+  transition: background-color 0.3s, border-color 0.3s;
+  flex-shrink: 0; 
+}
+
+label input[type="checkbox"]:checked {
+  background-color: #4a90e2;
+  border-color: #4a90e2;
+}
+
+label input[type="checkbox"]:checked::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 5px;
+  width: 6px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+label span {
+  flex: 1;
+}
+
+@media (max-width: 600px) {
+  .small-word {
+    font-size: 1.5rem;
+  }
+
+  .large-word {
+    font-size: 5rem;
+  }
+
+  .jspsych-instructions {
+    font-size: 1rem;
+    padding: 15px;
+  }
+
+  #jspsych-experiment {
+    padding: 20px;
+    margin: 10px;
+  }
+}
