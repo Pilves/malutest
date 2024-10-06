@@ -82,11 +82,11 @@ document.addEventListener("DOMContentLoaded", function() {
     stimulus: `
       <h2>Hea uuringus osaleja!</h2>
       <p>Käesoleva uuringuga soovime uurida, kuidas taustavärv ja sõnade fondi suurus mõjutavad inimeste mäluvõimet.</p>
-      <p>Uuring viiakse läbi Tartu Ülikooli psühholoogia instituudi eksperimentaalpsühholoogia aine raames. Uuringu käigus näed sa erinevaid sõnu, mis kuvatakse ekraanil erineva taustavärvi ja fondi suurusega.</p>
+      <p>Uuring viiakse läbi Tartu Ülikooli Psühholoogia Instituudi Eksperimentaalpsühholoogia aine raames. Uuringu käigus näed sa erinevaid sõnu, mis kuvatakse ekraanil erineva taustavärvi ja fondi suurusega.</p>
       <p>Pärast iga sõnade loetelu kuvamist palume sul meenutada ja kirja panna nii palju sõnu, kui sa mäletad. Osalemine võtab aega umbes 15 minutit.</p>
       <p>Uuringus osalemine on vabatahtlik ja sul on õigus osalemisest igal hetkel loobuda, jättes katse pooleli. Kõik uuringu raames kogutud andmed on konfidentsiaalsed ja anonüümsed. Kogutud andmeid kasutavad ainult uuringu läbiviijad ning andmeid kasutatakse teadus-, arendus- ja õppetööks.</p>
       <p>Palume sul uuringus osaleda ainult ühe korra. Kui oled Tartu Ülikooli psühholoogiatudeng, on sul võimalik uuringus osalemise eest teenida 0,5 katsetundi.</p>
-      <p>Kui sul on uuringu kohta küsimusi, siis võta meiega julgelt ühendust:</p>
+      <p>Kui sul on uuringu kohta küsimusi, siis võta meiega julgelt ühendust: <a href="mailto:agne.sokolov@gmail.com">agne.sokolov@gmail.com</a></p>
       <br>
       <p><b>Käesolevas uuringus osalemisel kinnitan järgnevate punktidega nõustumist (märgi kõik sobivad):</b></p>
       <label><input type="checkbox" id="checkbox1"> Olen täisealine (18-aastane või vanem);</label><br>
@@ -152,7 +152,7 @@ document.addEventListener("DOMContentLoaded", function() {
         <p>Antud uuringuga soovime täpsemalt uurida, kuidas mõjutavad erinevad taustavärvid ja sõnade fondi suurus mälu sooritust.</p>
         <p>Kui teil on uuringu kohta küsimusi või soovite uuringu üldtulemuste osas tagasisidet, siis palun kirjutage: <a href="mailto:agne.sokolov@gmail.com">agne.sokolov@gmail.com</a></p>
         <p>Palun hoidke katse sisu ja eesmärgid konfidentsiaalsed.</p>
-        <p>Tartu Ülikooli psühholoogiatudengitel on võimalik uuringus osalemise eest teenida 0,5 katsetundi.</p>
+        <p>Tartu Ülikooli psühholoogiatudengitel on võimalik uuringus osalemise eest teenida 0,15 katsetundi.</p>
         <p>Kui te soovite katsetunde, siis vajutage nuppu <b>Soovin katsetunde</b> ja tehke foto ekraanil kuvatavast infost.</p>
         <p>Kui te ei soovi katsetunde, siis vajutage katse lõpetamiseks nuppu <b>Lõpeta</b>.</p>
       `,
@@ -206,7 +206,7 @@ document.addEventListener("DOMContentLoaded", function() {
                   <h2>Kinnitus</h2>
                   <p>Kinnitame, et <b>${participantName}</b> osales "Taustavärvi ja sõnade fondi mõju mälule"uuringus.</p>
                   <p>Katse toimumise kuupäev: <b>${formattedDate}</b></p>
-                  <p>Osalejale on määratud 0,25 katsetundi.</p>
+                  <p>Osalejale on määratud 0,15 katsetundi.</p>
                   <p>Palun esitage see kinnitus oma õppejõule katsetundide saamiseks.</p>
                   <button id="submit-button" style="margin-top: 20px; padding: 10px; font-size: 16px;">Lõpeta</button>
                 `;
