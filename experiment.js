@@ -51,7 +51,26 @@ document.addEventListener("DOMContentLoaded", function() {
     });
     return trials;
   }
-
+  
+  function createRecallTrial(instruction) {
+    return {
+      type: 'survey-text',
+      questions: [{ prompt: instruction, rows: 5, columns: 40 }],
+      trial_duration: 90000, // 90 seconds
+      on_start: function() {
+        document.body.style.backgroundColor = 'white';
+      },
+      on_finish: function(data) {
+        // Process the data or any other action after the trial ends
+        participantResponses.push({
+          response: data.response ? data.response.Q0 : null,
+          rt: data.rt || null
+        });
+      }
+    };
+  }
+  
+  /*
   function createRecallTrial(instruction) {
     return {
       type: 'survey-text',
@@ -62,6 +81,7 @@ document.addEventListener("DOMContentLoaded", function() {
       trial_duration: 90000
     };
   }
+  */
 
   var stage1Trials = createWordTrials(stage1Words, '#413DFF', 'small-word');
   var stage1Recall = createRecallTrial("Esimene meenutamise etapp. Palun kirjuta 1.5 minuti jooksul üles kõik sõnad, mida sa just nägid. Sõnade vahele sisesta koma ja jätka tühikuta. Näide: koer,kass,maja");
