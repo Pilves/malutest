@@ -23,7 +23,7 @@ jsPsych.plugins.fullscreen = (function() {
       message: {
         type: jsPsych.plugins.parameterType.STRING,
         pretty_name: 'Message',
-        default: '<p>Katse lülitub täisekraani režiimi, kui vajutate allolevat nuppu.</p>',
+        default: '<p>Katse lülitub täisekraani režiimi, kui vajutad allolevat nuppu.</p>',
         array: false,
         description: 'HTML content to display above the button to enter fullscreen mode.'
       },
