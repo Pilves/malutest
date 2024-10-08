@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function() {
             type: 'html-keyboard-response',
             stimulus: '<p class="' + textClass + '">' + word + '</p>',
             choices: jsPsych.NO_KEYS,
-            trial_duration: 20,
+            trial_duration: 2000,
             data: {
                 word: word,
                 bg: background,
