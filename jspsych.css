@@ -9,6 +9,7 @@
 
 /* Container holding jsPsych content */
 
+
  .jspsych-display-element {
    display: flex;
    flex-direction: column;
@@ -75,6 +76,7 @@
   background-color: #fff;
   border-color: #ccc;
 }
+
 
 /* only apply the hover style on devices with a mouse/pointer that can hover - issue #977 */
 @media (hover: hover) {

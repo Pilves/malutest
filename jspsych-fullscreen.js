@@ -55,7 +55,7 @@ jsPsych.plugins.fullscreen = (function() {
     } else {
       if(trial.fullscreen_mode){
         display_element.innerHTML = trial.message + '<button id="jspsych-fullscreen-btn" class="jspsych-btn">'+trial.button_label+'</button>';
-        var listener = display_element.querySelector('#jspsych-fullscreen-btn').addEventListener('click', function() {
+        display_element.querySelector('#jspsych-fullscreen-btn').addEventListener('click', function() {
           var element = document.documentElement;
           if (element.requestFullscreen) {
             element.requestFullscreen();
@@ -66,6 +66,8 @@ jsPsych.plugins.fullscreen = (function() {
           } else if (element.msRequestFullscreen) {
             element.msRequestFullscreen();
           }
+          preventEscapeAndBack();
+          monitorFullscreen();
           endTrial();
         });
       } else {
@@ -82,6 +84,36 @@ jsPsych.plugins.fullscreen = (function() {
         }
         endTrial();
       }
+    }
+
+    function preventEscapeAndBack() {
+      document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape') {
+          event.preventDefault();
+        }
+      });
+
+      window.onpopstate = function(event) {
+        history.pushState(null, '', document.URL);
+      };
+      history.pushState(null, '', document.URL);
+    }
+
+    function monitorFullscreen() {
+      document.addEventListener('fullscreenchange', function() {
+        if (!document.fullscreenElement) {
+          var element = document.documentElement;
+          if (element.requestFullscreen) {
+            element.requestFullscreen();
+          } else if (element.mozRequestFullScreen) {
+            element.mozRequestFullScreen();
+          } else if (element.webkitRequestFullscreen) {
+            element.webkitRequestFullscreen();
+          } else if (element.msRequestFullscreen) {
+            element.msRequestFullscreen();
+          }
+        }
+      });
     }
 
     function endTrial() {

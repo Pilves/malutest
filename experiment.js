@@ -24,9 +24,11 @@ document.addEventListener("DOMContentLoaded", function() {
             type: 'html-keyboard-response',
             stimulus: '<p class="' + textClass + '">' + word + '</p>',
             choices: jsPsych.NO_KEYS,
-            trial_duration: 2000,
+            trial_duration: 20,
             data: {
-                word: word
+                word: word,
+                bg: background,
+                txtClass: textClass
             },
             on_finish: function(data) {
 
@@ -67,16 +69,16 @@ document.addEventListener("DOMContentLoaded", function() {
   
 
   var stage1Trials = createWordTrials(stage1Words, '#413DFF', 'small-word');
-  var stage1Recall = createRecallTrial("Esimene meenutamise etapp. Palun kirjuta 1.5 minuti jooksul üles kõik sõnad, mida sa just nägid. Sõnade vahele sisesta koma ja jätka tühikuta. Näide: koer,kass,maja");
+  var stage1Recall = createRecallTrial("Palun kirjuta 1.5 minuti jooksul üles kõik sõnad, mida sa just nägid. Sõnade vahele sisesta koma ja jätka tühikuta. Näide: koer,kass,maja");
 
   var stage2Trials = createWordTrials(stage2Words, '#FF413D', 'large-word');
-  var stage2Recall = createRecallTrial("Teine meenutamise etapp. Palun kirjuta 1.5 minuti jooksul üles kõik sõnad, mida sa just nägid. Sõnade vahele sisesta koma ja jätka tühikuta. Näide: koer,kass,maja");
+  var stage2Recall = createRecallTrial("Palun kirjuta 1.5 minuti jooksul üles kõik sõnad, mida sa just nägid. Sõnade vahele sisesta koma ja jätka tühikuta. Näide: koer,kass,maja");
 
   var stage3Trials = createWordTrials(stage3Words, '#FF413D', 'small-word');
-  var stage3Recall = createRecallTrial("Kolmas meenutamise etapp. Palun kirjuta 1.5 minuti jooksul üles kõik sõnad, mida sa just nägid. Sõnade vahele sisesta koma ja jätka tühikuta. Näide: koer,kass,maja");
+  var stage3Recall = createRecallTrial("Palun kirjuta 1.5 minuti jooksul üles kõik sõnad, mida sa just nägid. Sõnade vahele sisesta koma ja jätka tühikuta. Näide: koer,kass,maja");
 
   var stage4Trials = createWordTrials(stage4Words, '#413DFF', 'large-word');
-  var stage4Recall = createRecallTrial("Neljas meenutamise etapp. Palun kirjuta 1.5 minuti jooksul üles kõik sõnad, mida sa just nägid. Sõnade vahele sisesta koma ja jätka tühikuta. Näide: koer,kass,maja");
+  var stage4Recall = createRecallTrial("Palun kirjuta 1.5 minuti jooksul üles kõik sõnad, mida sa just nägid. Sõnade vahele sisesta koma ja jätka tühikuta. Näide: koer,kass,maja");
 
   var timeline = [];
   
@@ -85,22 +87,32 @@ document.addEventListener("DOMContentLoaded", function() {
     stimulus: `
       <h2>Hea uuringus osaleja!</h2>
       <p>Käesoleva uuringuga soovime uurida, kuidas taustavärv ja sõnade fondi suurus mõjutavad inimeste mäluvõimet.</p>
-      <p>Uuring viiakse läbi Tartu Ülikooli Psühholoogia Instituudi Eksperimentaalpsühholoogia aine raames. Uuringu käigus näed sa erinevaid sõnu, mis kuvatakse ekraanil erineva taustavärvi ja fondi suurusega.</p>
+      <p>Uuring viiakse läbi Tartu Ülikooli Psühholoogia instituudi eksperimentaalpsühholoogia aine raames. Uuringu käigus näed sa erinevaid sõnu, mis kuvatakse ekraanil erineva taustavärvi ja fondi suurusega.</p>
       <p>Pärast iga sõnade loetelu kuvamist palume sul meenutada ja kirja panna nii palju sõnu, kui sa mäletad. Osalemine võtab aega umbes 15 minutit.</p>
       <p>Uuringus osalemine on vabatahtlik ja sul on õigus osalemisest igal hetkel loobuda, jättes katse pooleli. Kõik uuringu raames kogutud andmed on konfidentsiaalsed ja anonüümsed. Kogutud andmeid kasutavad ainult uuringu läbiviijad ning andmeid kasutatakse teadus-, arendus- ja õppetööks.</p>
-      <p>Palume sul uuringus osaleda ainult ühe korra. Kui oled Tartu Ülikooli psühholoogiatudeng, on sul võimalik uuringus osalemise eest teenida 0,15 katsetundi.</p>
+      <p>Palume sul uuringus osaleda ainult ühe korra. Kui oled Tartu Ülikooli psühholoogiatudeng, on sul võimalik uuringus osalemise eest teenida 0,25 katsetundi.</p>
       <p>Kui sul on uuringu kohta küsimusi, siis võta meiega julgelt ühendust: <a href="mailto:agne.sokolov@gmail.com">agne.sokolov@gmail.com</a></p>
       <br>
       <p><b>Käesolevas uuringus osalemisel kinnitan järgnevate punktidega nõustumist (märgi kõik sobivad):</b></p>
+      <div class="checkboxes">
       <label><input type="checkbox" id="checkbox1"> Olen täisealine (18-aastane või vanem);</label><br>
       <label><input type="checkbox" id="checkbox2"> Osalen enda teada uuringus esimest korda;</label><br>
       <label><input type="checkbox" id="checkbox3"> Olen tutvunud uuringu tutvustusega;</label><br>
       <label><input type="checkbox" id="checkbox4"> Olen teadlik, et uuringu käigus minult kogutud andmeid kasutatakse anonüümselt teadus-, arendus- ja õppetöö eesmärkidel;</label><br>
       <label><input type="checkbox" id="checkbox5"> Olen nõus vabatahtlikult uuringus osalema.</label>
+      </div>
+      <button class="select-all">Vali kõik</button>
     `,
     choices: ['ALUSTA'],
     button_html: '<button disabled class="jspsych-btn">%choice%</button>',
     on_load: function() {
+      document.querySelector('.select-all').addEventListener('click', function() {
+        const checkboxes = document.querySelectorAll('.checkboxes input[type="checkbox"]');
+        checkboxes.forEach(checkbox => {
+          checkbox.checked = true;
+        });
+        checkAllMarked();
+      });
       function checkAllMarked() {
         const allChecked = document.getElementById('checkbox1').checked &&
                            document.getElementById('checkbox2').checked &&
@@ -123,10 +135,13 @@ document.addEventListener("DOMContentLoaded", function() {
       document.body.style.backgroundColor = 'white';
     }
   });
+
   timeline.push({
     type: 'html-button-response',
     stimulus: `
-      <h2>Oled nüüd valmis alustama katset, mis uurib, kuidas taustavärv ja sõnade fondi suurus mõjutavad mälu.</h2>
+      <p>Olen nüüd valmis alustama katset, mis uurib, kuidas taustavärv ja sõnade fondi suurus mõjutavad mälu.</p>
+      <p>Palun soorita katse vaikses ja häirimatus keskkonnas.<br>Veendu, et sul on hea internetiühendus ja ekraanile ei paista päike.<br>Palun kasuta katse tegemiseks arvutit, mitte telefoni.</p>
+      <p><b>Sinu ülesanne:</b> jälgi ekraanile ilmuvaid sõnu ja proovi need meelde jätta.</p>
       <p>Kui oled valmis, vajuta <b>Start</b>, et alustada katset.</p>
     `,
     choices: ['Start']
@@ -148,16 +163,17 @@ document.addEventListener("DOMContentLoaded", function() {
 
   var participantResponses = [];
 
+  
     var finalMessageTrial = {
       type: 'html-button-response',
       stimulus: `
-        <h2>Aitäh Teile katse läbimise eest!</h2>
+        <h2>Aitäh katse läbimise eest!</h2>
         <p>Antud uuringuga soovime täpsemalt uurida, kuidas mõjutavad erinevad taustavärvid ja sõnade fondi suurus mälu sooritust.</p>
         <p>Kui teil on uuringu kohta küsimusi või soovite uuringu üldtulemuste osas tagasisidet, siis palun kirjutage: <a href="mailto:agne.sokolov@gmail.com">agne.sokolov@gmail.com</a></p>
         <p>Palun hoidke katse sisu ja eesmärgid konfidentsiaalsed.</p>
-        <p>Tartu Ülikooli psühholoogiatudengitel on võimalik uuringus osalemise eest teenida 0,15 katsetundi.</p>
-        <p>Kui te soovite katsetunde, siis vajutage nuppu <b>Soovin katsetunde</b> ja tehke foto ekraanil kuvatavast infost.</p>
-        <p>Kui te ei soovi katsetunde, siis vajutage katse lõpetamiseks nuppu <b>Lõpeta</b>.</p>
+        <p>Tartu Ülikooli psühholoogiatudengitel on võimalik uuringus osalemise eest teenida 0,25 katsetundi.</p>
+        <p>Kui soovid katsetunde, siis vajuta nuppu <b>Soovin katsetunde</b> ja tee foto ekraanil kuvatavast infost.</p>
+        <p>Kui ei soovi katsetunde, siis vajuta katse lõpetamiseks nuppu <b>Lõpeta</b>.</p>
       `,
       choices: ['Soovin katsetunde', 'Lõpeta'],
       on_finish: function(data) {
@@ -184,7 +200,6 @@ document.addEventListener("DOMContentLoaded", function() {
         });
 
         const finalData = {
-          "word order": words,
           "user response": userResponses
         };
 
@@ -209,7 +224,7 @@ document.addEventListener("DOMContentLoaded", function() {
                   <h2>Kinnitus</h2>
                   <p>Kinnitame, et <b>${participantName}</b> osales "Taustavärvi ja sõnade fondi mõju mälule"uuringus.</p>
                   <p>Katse toimumise kuupäev: <b>${formattedDate}</b></p>
-                  <p>Osalejale on määratud 0,15 katsetundi.</p>
+                  <p>Osalejale on määratud 0,25 katsetundi.</p>
                   <p>Palun esitage see kinnitus oma õppejõule katsetundide saamiseks.</p>
                   <button id="submit-button" style="margin-top: 20px; padding: 10px; font-size: 16px;">Lõpeta</button>
                 `;
@@ -235,7 +250,7 @@ document.addEventListener("DOMContentLoaded", function() {
     
       }
     };
-    
+
     timeline.push(finalMessageTrial);
 
 
