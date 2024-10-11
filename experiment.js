@@ -79,11 +79,11 @@ function createRecallTrial(instruction, background, textClass) {
       <br>
       <p><b>Käesolevas uuringus osalemisel kinnitan järgnevate punktidega nõustumist (märgi kõik sobivad):</b></p>
       <div class="checkboxes">
-      <label><input type="checkbox" id="checkbox1"> Olen täisealine (18-aastane või vanem);</label><br>
-      <label><input type="checkbox" id="checkbox2"> Osalen enda teada uuringus esimest korda;</label><br>
-      <label><input type="checkbox" id="checkbox3"> Olen tutvunud uuringu tutvustusega;</label><br>
-      <label><input type="checkbox" id="checkbox4"> Olen teadlik, et uuringu käigus minult kogutud andmeid kasutatakse anonüümselt teadus-, arendus- ja õppetöö eesmärkidel;</label><br>
-      <label><input type="checkbox" id="checkbox5"> Olen nõus vabatahtlikult uuringus osalema.</label>
+      <label><input type="checkbox" id="checkbox1"> Olen täisealine (18-aastane või vanem).</label><br>
+      <label><input type="checkbox" id="checkbox2"> Osalen enda teada uuringus esimest korda.</label><br>
+      <label><input type="checkbox" id="checkbox3"> Olen tutvunud uuringu tutvustusega.</label><br>
+      <label><input type="checkbox" id="checkbox5"> Olen nõus vabatahtlikult uuringus osalema.</label><br>
+      <label><input type="checkbox" id="checkbox4"> Olen teadlik, et uuringu käigus minult kogutud andmeid kasutatakse anonüümselt teadus-, arendus- ja õppetöö eesmärkidel.</label><br>
       </div>
       <button class="select-all">Vali kõik</button>
     `,

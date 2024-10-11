@@ -7,95 +7,77 @@
 body {
   font-family: 'Roboto', sans-serif;
   background-color: #f4f6f9;
-  color: #333333;
+  color: #333;
   display: flex;
   justify-content: center;
-  align-items: center; 
+  align-items: center;
   min-height: 100vh;
   margin: 0;
-  padding: 0;
-}
-label {
-  font-family: Arial, sans-serif;
-  font-size: 16px;
-  margin-bottom: 8px;
-  display: block;
-  color: #333;
 }
 
 input[type="number"], select {
   width: 100%;
-  padding: 10px;
-  margin-top: 5px;
-  margin-bottom: 20px;
+  max-width: 300px;  /* Set a max width to prevent too wide inputs */
+  padding: 12px;
+  margin: 10px 0;  /* Improved spacing */
   border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-  font-family: Arial, sans-serif;
+  border-radius: 8px;
+  font-family: 'Roboto', sans-serif;
   font-size: 16px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 input[type="number"]:focus, select:focus {
-  border-color: #007bff;
-  box-shadow: 0 0 8px rgba(0, 123, 255, 0.25);
+  border-color: #007bff;  /* Highlight the field with a blue border */
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.25);  /* Add a soft shadow on focus */
+  outline: none;  /* Remove the default browser outline */
 }
 
+/* Style the dropdown for select input */
 select {
-  appearance: none;
+  appearance: none;  /* Remove default browser styling */
   background-color: #fff;
-  background-repeat: no-repeat;
-  background-position: right 10px top 50%;
-  background-size: 12px;
-}
-
-input[type="number"] {
-  max-width: 200px;
-}
-
-#sex {
-  width: 100%;
-  padding: 10px;
-  margin-top: 5px;
-  margin-bottom: 20px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-  font-family: Arial, sans-serif;
-  font-size: 16px;
-  background-color: #fff;
-  appearance: none;
-  background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMCIgaGVpZ2h0PSIxMCI+PHBhdGggZmlsbD0iIzMzMyIgZD0iTTUgN2w0LTRIM3oiLz48L3N2Zz4=');
+  background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMCIgaGVpZ2h0PSIxMCI+PHBhdGggZmlsbD0iIzMzMyIgZD0iTTUgN2w0LTRIM3oiLz48L3N2Zz4='); /* Custom dropdown arrow */
   background-repeat: no-repeat;
   background-position: right 10px center;
   background-size: 12px;
+  padding-right: 30px;  /* Space for the dropdown arrow */
 }
 
-#sex:focus {
+select:focus {
   border-color: #007bff;
   box-shadow: 0 0 8px rgba(0, 123, 255, 0.25);
 }
 
-.checkboxes {
+input[type="number"] {
+  max-width: 150px;  /* Set max width for number input */
+  text-align: center;  /* Center the text for a neater look */
+}
+
+/* Additional styling for labels */
+label {
+  font-size: 18px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+/* Styling the container that wraps the form inputs */
+.form-container {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 10px; /* Space between checkboxes */
-  width: 100%;
-  font-size: 18px;
-}
-
-.checkboxes label {
-  display: flex;
-  align-items: center;
-  margin: 0; 
-  padding: 0; 
+  gap: 20px;  /* Add space between the form fields */
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
 }
 
 .select-all {
   margin-top: 20px;
-  padding: 10px 20px;
+  margin-bottom: 10px;
+  padding: 12px 24px;
   background-color: #4a90e2;
-  color: #ffffff;
+  color: #fff;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -106,80 +88,6 @@ input[type="number"] {
 .select-all:hover {
   background-color: #357ab8;
   transform: translateY(-2px);
-}
-
-button, .jspsych-btn {
-  margin-top: 20px; 
-}
-
-.checkboxes input[type="checkbox"] {
-  transform: scale(0.8);
-  margin-right: 5px;
-}
-
-#jspsych-experiment {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 40px;
-  max-width: 900px;
-  margin: 0 auto;
-  background-color: #ffffff;
-  border-radius: 15px;
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1); 
-}
-
-p, ul {
-  padding: 10px 20px;
-  line-height: 1.6; 
-  font-size: 1.1rem;
-}
-
-h2 {
-  padding: 20px; 
-  margin-bottom: 20px;
-  line-height: 1.4;
-}
-
-ul {
-  padding-left: 40px; 
-}
-
-button, .jspsych-btn {
-  margin-top: 20px; 
-}
-
-.jspsych-content-wrapper {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.jspsych-instructions {
-  max-width: 800px;
-  text-align: center;
-  padding: 30px;
-  font-size: 1.2rem;
-  line-height: 1.8;
-  color: #4a4a4a;
-}
-
-.jspsych-content {
-  font-size: 1.8rem;
-  text-align: center;
-  color: #333333;
-  padding: 20px 0;
-}
-
-.small-word {
-  font-size: 2rem;
-}
-
-.large-word {
-  font-size: 8rem;
 }
 
 button, .jspsych-btn {
@@ -199,59 +107,47 @@ button:hover, .jspsych-btn:hover {
   transform: translateY(-2px);
 }
 
-input[type="text"], textarea {
-  width: 100%;
-  max-width: 600px;
-  padding: 15px;
-  margin: 10px auto;
-  border: 1px solid #dcdcdc;
-  border-radius: 5px;
-  font-size: 1rem;
-  background-color: #f9f9f9;
-  color: #333333;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-}
-
-input[type="text"]:focus, textarea:focus {
-  border-color: #4a90e2;
-  outline: none;
-}
-
-.jspsych-survey-text-question {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-label {
+.checkboxes {
   display: flex;
-  align-items: center;
-  margin-bottom: 15px;
-  cursor: pointer;
-  line-height: 1.5; 
+  flex-direction: column;
+  gap: 15px; /* Space between each checkbox */
+  font-size: 18px;
+  color: #333;
+  padding: 20px 0;
+  align-items: flex-start; /* Align labels and checkboxes to the left */
 }
 
-label input[type="checkbox"] {
-  appearance: none;
+.checkboxes label {
+  display: flex;
+  align-items: flex-start; /* Align checkbox with the top of the text */
+  cursor: pointer;
+  font-size: 1.1rem; /* Slightly larger font for readability */
+  gap: 10px; /* Space between the checkbox and the label */
+  line-height: 1.4; /* Better line spacing for wrapped text */
+}
+
+.checkboxes input[type="checkbox"] {
+  appearance: none; /* Remove default checkbox style */
   width: 20px;
   height: 20px;
-  border: 2px solid #4a90e2;
+  border: 2px solid #4a90e2; /* Blue border */
   border-radius: 4px;
-  margin-right: 10px;
-  position: relative;
+  display: inline-block;
+  margin-top: 4px; /* Align checkbox with the text's first line */
+  cursor: pointer;
   transition: background-color 0.3s, border-color 0.3s;
-  flex-shrink: 0; 
 }
 
-label input[type="checkbox"]:checked {
-  background-color: #4a90e2;
+.checkboxes input[type="checkbox"]:checked {
+  background-color: #4a90e2; /* Fill checkbox when checked */
   border-color: #4a90e2;
 }
 
-label input[type="checkbox"]:checked::after {
+.checkboxes input[type="checkbox"]:checked::after {
   content: '';
   position: absolute;
   top: 3px;
-  left: 5px;
+  left: 6px;
   width: 6px;
   height: 10px;
   border: solid white;
@@ -259,8 +155,67 @@ label input[type="checkbox"]:checked::after {
   transform: rotate(45deg);
 }
 
-label span {
-  flex: 1;
+.checkboxes input[type="checkbox"]:hover {
+  border-color: #357ab8; /* Change border color on hover */
+}
+
+.checkboxes label span {
+  font-size: 1rem;
+  color: #333;
+  line-height: 1.6;
+}
+
+button, .jspsych-btn {
+  margin-top: 20px;
+  background-color: #4a90e2;
+  color: #ffffff;
+  border: none;
+  padding: 12px 24px;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s ease-in-out;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+button:hover, .jspsych-btn:hover {
+  background-color: #357ab8;
+  transform: translateY(-2px);
+}
+
+#jspsych-experiment {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  max-width: 900px;
+  margin: 0 auto;
+  background-color: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+p, ul {
+  padding: 10px 20px;
+  line-height: 1.6;
+  font-size: 1.1rem;
+}
+
+h2 {
+  padding: 20px;
+  margin-bottom: 20px;
+  line-height: 1.4;
+  font-size: 2rem;
+}
+
+.small-word {
+  font-size: 2rem;
+}
+
+.large-word {
+  font-size: 8rem;
 }
 
 @media (max-width: 600px) {
@@ -270,11 +225,6 @@ label span {
 
   .large-word {
     font-size: 5rem;
-  }
-
-  .jspsych-instructions {
-    font-size: 1rem;
-    padding: 15px;
   }
 
   #jspsych-experiment {
