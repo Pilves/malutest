@@ -1,7 +1,6 @@
-
 document.addEventListener("DOMContentLoaded", function() {
 
-  // Function to shuffle words
+  //shuffle words just for fun
   function shuffle(array) {
     for (let i = array.length - 1; i > 0; i--) {
       let j = Math.floor(Math.random() * (i + 1)); 
@@ -9,53 +8,43 @@ document.addEventListener("DOMContentLoaded", function() {
     }
     return array;
   }
-  var stage1Words = shuffle(['Raamat', 'Tool', 'Jää', 'Joon', 'Kaart', 'Klaas', 'Õun', 'Sein', 'Teater', 'Lammas', 'Pastakas', 'Kivi', 'Lauk', 'Kuu', 'Lamp']);
-  var stage2Words = shuffle(['Jakk', 'Puu', 'Raadio', 'Aken', 'Järv', 'Ring', 'Leht', 'Raamat', 'Klaas', 'Ratas', 'Tänav', 'Loss', 'Kuningas', 'Sild', 'Kaste']);
-  var stage3Words = shuffle(['Kontor', 'Poiss', 'Lill', 'Auto', 'Tasku', 'Pall', 'Lint', 'Jõgi', 'Tüdruk', 'Aken', 'Kuju', 'Kork', 'Sõrmus', 'Sadam', 'Aed']);
-  var stage4Words = shuffle(['Kott', 'Maja', 'Arbuus', 'Pliiats', 'Kool', 'Paber', 'Saabas', 'Taim', 'Linn', 'Kardin', 'Käik', 'Aken', 'Redel', 'Rida', 'Põld']);
 
-  var trials = [];
+  //all words for the experiment
+  const words1 = shuffle(['Raamat', 'Tool', 'Jää', 'Joon', 'Kaart', 'Klaas', 'Õun', 'Sein', 'Teater', 'Lammas', 'Pastakas', 'Kivi', 'Lauk', 'Kuu', 'Lamp']);
+  const words2 = shuffle(['Jakk', 'Puu', 'Raadio', 'Aken', 'Järv', 'Ring', 'Leht', 'Raamat', 'Klaas', 'Ratas', 'Tänav', 'Loss', 'Kuningas', 'Sild', 'Kaste']);
+  const words3 = shuffle(['Kontor', 'Poiss', 'Lill', 'Auto', 'Tasku', 'Pall', 'Lint', 'Jõgi', 'Tüdruk', 'Aken', 'Kuju', 'Kork', 'Sõrmus', 'Sadam', 'Aed']);
+  const words4 = shuffle(['Kott', 'Maja', 'Arbuus', 'Pliiats', 'Kool', 'Paber', 'Saabas', 'Taim', 'Linn', 'Kardin', 'Käik', 'Aken', 'Redel', 'Rida', 'Põld']);
 
-
+  //create trials for the experiment
   function createWordTrials(words, background, textClass) {
-    var trials = [];
-    words.forEach(function(word) {
-        trials.push({
-            type: 'html-keyboard-response',
-            stimulus: '<p class="' + textClass + '">' + word + '</p>',
-            choices: jsPsych.NO_KEYS,
-            trial_duration: 2000,
-            data: {
-                word: word,
-                bg: background,
-                txtClass: textClass
-            },
-            on_finish: function(data) {
-
-                participantResponses.push({
-                  word: data.word,
-                  response: data.response || null,
-                  rt: data.rt || null
-                });
-            },
-            on_start: function() {
-                document.body.style.backgroundColor = background;
-                document.documentElement.style.backgroundColor = background;
-                document.body.style.height = "100vh";
-                document.body.style.width = "100vw";
-
-                var experimentElement = document.getElementById('jspsych-experiment');
-                experimentElement.style.backgroundColor = 'transparent';
-                experimentElement.style.boxShadow = 'none';
-                experimentElement.style.borderRadius = '0';
-            }
+    return words.map(word => ({
+      type: 'html-keyboard-response',
+      stimulus: `<p class="${textClass}">${word}</p>`,
+      choices: jsPsych.NO_KEYS,
+      trial_duration: 200,
+      data: {word: word, bg: background, txtClass: textClass },
+      on_finish: function(data) {
+        participantResponses.push({
+          response: data.response || null,
+          rt: data.rt || null
         });
-    });
-    return trials;
+      },
+      on_start: function() {
+        document.body.style.backgroundColor = background;
+        document.documentElement.style.backgroundColor = background;
+        document.body.style.height = "100vh";
+        document.body.style.width = "100vw";
+        const experimentElement = document.getElementById('jspsych-experiment');
+        if (experimentElement) {
+          experimentElement.style.backgroundColor = 'transparent';
+          experimentElement.style.boxShadow = 'none';
+          experimentElement.style.borderRadius = '0';
+        }
+      }
+    }));
   }
 
-
-  
+  //create recall trial for the experiment
   function createRecallTrial(instruction) {
     return {
       type: 'survey-text',
@@ -66,22 +55,11 @@ document.addEventListener("DOMContentLoaded", function() {
       trial_duration: 90000
     };
   }
-  
 
-  var stage1Trials = createWordTrials(stage1Words, '#413DFF', 'small-word');
-  var stage1Recall = createRecallTrial("Palun kirjuta 1.5 minuti jooksul üles kõik sõnad, mida sa just nägid. Sõnade vahele sisesta koma ja jätka tühikuta. Näide: koer,kass,maja");
-
-  var stage2Trials = createWordTrials(stage2Words, '#FF413D', 'large-word');
-  var stage2Recall = createRecallTrial("Palun kirjuta 1.5 minuti jooksul üles kõik sõnad, mida sa just nägid. Sõnade vahele sisesta koma ja jätka tühikuta. Näide: koer,kass,maja");
-
-  var stage3Trials = createWordTrials(stage3Words, '#FF413D', 'small-word');
-  var stage3Recall = createRecallTrial("Palun kirjuta 1.5 minuti jooksul üles kõik sõnad, mida sa just nägid. Sõnade vahele sisesta koma ja jätka tühikuta. Näide: koer,kass,maja");
-
-  var stage4Trials = createWordTrials(stage4Words, '#413DFF', 'large-word');
-  var stage4Recall = createRecallTrial("Palun kirjuta 1.5 minuti jooksul üles kõik sõnad, mida sa just nägid. Sõnade vahele sisesta koma ja jätka tühikuta. Näide: koer,kass,maja");
-
+  //create timeline for the experiment
   var timeline = [];
   
+  //first page of the experiment
   timeline.push({
     type: 'html-button-response',
     stimulus: `
@@ -136,34 +114,87 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   });
 
+  //second page of the experiment
   timeline.push({
-    type: 'html-button-response',
-    stimulus: `
+    type: 'survey-html-form',
+    preamble: `
       <p>Olen nüüd valmis alustama katset, mis uurib, kuidas taustavärv ja sõnade fondi suurus mõjutavad mälu.</p>
       <p>Palun soorita katse vaikses ja häirimatus keskkonnas.<br>Veendu, et sul on hea internetiühendus ja ekraanile ei paista päike.<br>Palun kasuta katse tegemiseks arvutit, mitte telefoni.</p>
       <p><b>Sinu ülesanne:</b> jälgi ekraanile ilmuvaid sõnu ja proovi need meelde jätta.</p>
-      <p>Kui oled valmis, vajuta <b>Start</b>, et alustada katset.</p>
+      <p>Enne alustamist palun sisesta oma vanus ja vali sugu.</p>
     `,
-    choices: ['Start']
+    html: `
+      <label for="age">Vanus:</label>
+      <input type="number" id="age" name="age" min="18" required><br><br>
+      <label for="sex">Sugu:</label>
+      <select id="sex" name="sex" required>
+        <option value="">Vali sugu</option>
+        <option value="mees">Mees</option>
+        <option value="naine">Naine</option>
+        <option value="muu">Muu</option>
+      </select><br><br>
+    `,
+    button_label: 'Start',
+    on_finish: function(data) {
+      // The data.response contains the form data
+      var responses = data.response;
+      
+      // Access the age and sex fields from the form responses
+      var age = responses['age'];
+      var sex = responses['sex'];
+
+      // Store these details in the data set for later use
+      jsPsych.data.addProperties({
+        age: age,
+        sex: sex
+      });
+    }
   });
-  
+
+  //fullscreen mode
   timeline.push({
     type: 'fullscreen',
     fullscreen_mode: true
   });
 
-  timeline = timeline.concat(stage1Trials);
-  timeline.push(stage1Recall);
-  timeline = timeline.concat(stage2Trials);
-  timeline.push(stage2Recall);
-  timeline = timeline.concat(stage3Trials);
-  timeline.push(stage3Recall);
-  timeline = timeline.concat(stage4Trials);
-  timeline.push(stage4Recall);
+  //create trials for the experiment
+  var stage1Trials = createWordTrials(words1, '#413DFF', 'small-word');
+  var stage1Recall = createRecallTrial("Palun kirjuta 1.5 minuti jooksul üles kõik sõnad, mida sa just nägid. Sõnade vahele sisesta koma ja jätka tühikuta. Näide: koer,kass,maja");
+  var stage2Trials = createWordTrials(words2, '#FF413D', 'large-word');
+  var stage2Recall = createRecallTrial("Palun kirjuta 1.5 minuti jooksul üles kõik sõnad, mida sa just nägid. Sõnade vahele sisesta koma ja jätka tühikuta. Näide: koer,kass,maja");
+  var stage3Trials = createWordTrials(words3, '#FF413D', 'small-word');
+  var stage3Recall = createRecallTrial("Palun kirjuta 1.5 minuti jooksul üles kõik sõnad, mida sa just nägid. Sõnade vahele sisesta koma ja jätka tühikuta. Näide: koer,kass,maja");
+  var stage4Trials = createWordTrials(words4, '#413DFF', 'large-word');
+  var stage4Recall = createRecallTrial("Palun kirjuta 1.5 minuti jooksul üles kõik sõnad, mida sa just nägid. Sõnade vahele sisesta koma ja jätka tühikuta. Näide: koer,kass,maja");
+
+  //shuffle stages
+  const stages = [
+    { trials: stage1Trials, recall: stage1Recall, color: '#413DFF' },
+    { trials: stage2Trials, recall: stage2Recall, color: '#FF413D' },
+    { trials: stage3Trials, recall: stage3Recall, color: '#FF413D' },
+    { trials: stage4Trials, recall: stage4Recall, color: '#413DFF' }
+  ];
+  
+  function selectStages(stages) {
+    let shuffled = [];
+    let remaining = [...stages];
+  
+    while (remaining.length > 0) {
+      let currentStage = remaining.splice(Math.floor(Math.random() * remaining.length), 1)[0];
+      shuffled.push(currentStage);
+    }
+  
+    return shuffled;
+  }
+  const shuffledStages = selectStages(stages);
+  while (shuffledStages.length > 0) {
+    let currentStage = shuffledStages.splice(Math.floor(Math.random() * shuffledStages.length), 1)[0];
+    timeline = timeline.concat(currentStage.trials);
+    timeline.push(currentStage.recall);
+  }
 
   var participantResponses = [];
 
-  
     var finalMessageTrial = {
       type: 'html-button-response',
       stimulus: `
@@ -177,37 +208,26 @@ document.addEventListener("DOMContentLoaded", function() {
       `,
       choices: ['Soovin katsetunde', 'Lõpeta'],
       on_finish: function(data) {
-        
+        // Exit full screen if enabled
         if (document.fullscreenElement) {
           document.exitFullscreen();
         }
-
+    
+        // Get all data from the experiment
         const allData = jsPsych.data.get().values();
-
-        let words = [];
-        let userResponses = [];
-
-        allData.forEach(trial => {
-          if (trial.word) {
-
-              words.push(trial.word);
-          }
     
-          if (trial.response && trial.response.Q0) {
-
-              userResponses.push(trial.response.Q0.trim());
-          }
-        });
-
-        const finalData = {
-          "user response": userResponses
-        };
-
+        // Process experiment data and prepare for form submission
+        const finalData = processExperimentData(allData);
+    
+        // Convert finalData to JSON format
         const jsonData = JSON.stringify(finalData, null, 2);
+        console.log(jsonData);
     
+        // Set the hidden input field values in the form for submission
         document.getElementById('dataInput').value = jsonData;
-
-        if (data.response === 0) {
+    
+        // Handle different responses (like "Soovin katsetunde" or "Lõpeta")
+        if (data.response === 0) { // If "Soovin katsetunde" is clicked
           jsPsych.addNodeToEndOfTimeline({
             type: 'survey-text',
             questions: [{ prompt: "Sisestage oma nimi katsetundide saamiseks:", rows: 1, columns: 50 }],
@@ -216,7 +236,7 @@ document.addEventListener("DOMContentLoaded", function() {
               if (lastTrialData && lastTrialData.response && lastTrialData.response.Q0) {
                 var participantName = lastTrialData.response.Q0.trim();
                 document.getElementById('participantName').value = participantName;
-
+    
                 var currentDate = new Date();
                 var formattedDate = currentDate.toLocaleDateString('et-EE');
     
@@ -228,29 +248,82 @@ document.addEventListener("DOMContentLoaded", function() {
                   <p>Palun esitage see kinnitus oma õppejõule katsetundide saamiseks.</p>
                   <button id="submit-button" style="margin-top: 20px; padding: 10px; font-size: 16px;">Lõpeta</button>
                 `;
-
+    
                 document.getElementById('submit-button').addEventListener('click', function() {
                   document.getElementById('jspsych-experiment').innerHTML = `
                     <h2>Eksperiment on nüüd lõppenud</h2>
                     <p>Palun oota kuni minut enne vahelehe sulgemist.</p>
                   `;
-
-                  document.getElementById('dataForm').submit();
+                  document.getElementById('dataForm').submit(); // Submit the form with hidden inputs
                 });
               }
             }
           });
-        } else {
+        } else { // If "Lõpeta" is clicked
           document.getElementById('jspsych-experiment').innerHTML = `
             <h2>Eksperiment on nüüd lõppenud</h2>
             <p>Palun oota kuni minut enne vahelehe sulgemist.</p>
           `;
-          document.getElementById('dataForm').submit();
+          document.getElementById('dataForm').submit(); // Submit the form with hidden inputs
         }
-    
       }
     };
-
+    
+    function processExperimentData(data) {
+      const demographic = {
+        age: data.find(trial => trial.trial_type === 'survey-html-form')?.response?.age,
+        sex: data.find(trial => trial.trial_type === 'survey-html-form')?.response?.sex
+      };
+    
+      const wordTrials = [];
+      const recallResponses = [];
+    
+      // Extract the word trials and recall responses
+      data.forEach(trial => {
+        if (trial.trial_type === 'html-keyboard-response' && trial.word) {
+          wordTrials.push({
+            word: trial.word,
+            background: trial.bg,
+            textClass: trial.txtClass,
+            responseTime: trial.rt
+          });
+        }
+    
+        if (trial.trial_type === 'survey-text' && trial.response) {
+          recallResponses.push({
+            response: trial.response.Q0.trim(),
+            background: trial.bg,
+            textClass: trial.txtClass
+          });
+        }
+      });
+    
+      // Sort recall responses based on the order you want:
+      // 1. Blue background, small font
+      // 2. Red background, large font
+      // 3. Red background, small font
+      // 4. Blue background, large font
+      const sortedRecallResponses = recallResponses.sort((a, b) => {
+        const order = {
+          "#413DFFsmall-word": 1, // Blue background, small font
+          "#FF413Dlarge-word": 2, // Red background, large font
+          "#FF413Dsmall-word": 3, // Red background, small font
+          "#413DFFlarge-word": 4  // Blue background, large font
+        };
+        const aKey = a.background + a.textClass;
+        const bKey = b.background + b.textClass;
+        return order[aKey] - order[bKey];
+      });
+    
+      // Return the final processed data with sorted recall responses
+      return {
+        demographic,
+        wordTrials,
+        recallResponses: sortedRecallResponses.map(item => item.response) // Just the sorted responses
+      };
+    }
+    
+    
     timeline.push(finalMessageTrial);
 
 
