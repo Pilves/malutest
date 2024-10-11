@@ -10,65 +10,69 @@ body {
   color: #333333;
   display: flex;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center; 
   min-height: 100vh;
   margin: 0;
-  padding: 20px 0; 
+  padding: 0;
 }
-
-form label {
-  display: flex;
-  align-items: center;
-  margin-bottom: 15px;
-  font-size: 18px; /* Match the font size */
-}
-
-form input[type="number"],
-form select {
-  margin-left: 10px; /* Add spacing between label and input */
-  padding: 5px;
+label {
+  font-family: Arial, sans-serif;
   font-size: 16px;
-  border: 1px solid #dcdcdc;
-  border-radius: 5px;
-  flex-grow: 1; /* Ensure input fields expand */
-  max-width: 150px; /* Control input size */
+  margin-bottom: 8px;
+  display: block;
+  color: #333;
 }
 
-form button {
-  background-color: #4a90e2;
-  color: #ffffff;
-  border: none;
-  padding: 10px 20px;
-  font-size: 16px;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-top: 20px;
-  transition: background-color 0.3s, transform 0.2s ease-in-out;
-}
-
-form button:hover {
-  background-color: #357ab8;
-  transform: translateY(-2px);
-}
-
-
-form {
-  max-width: 400px;
-  margin: 0 auto;
-  text-align: left;
-}
-
-
-form label {
+input[type="number"], select {
   width: 100%;
-  display: flex;
-  justify-content: space-between;
+  padding: 10px;
+  margin-top: 5px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
 }
 
-form input,
-form select {
-  flex: 1;
+input[type="number"]:focus, select:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.25);
+}
+
+select {
+  appearance: none;
+  background-color: #fff;
+  background-repeat: no-repeat;
+  background-position: right 10px top 50%;
+  background-size: 12px;
+}
+
+input[type="number"] {
   max-width: 200px;
+}
+
+#sex {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  background-color: #fff;
+  appearance: none;
+  background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMCIgaGVpZ2h0PSIxMCI+PHBhdGggZmlsbD0iIzMzMyIgZD0iTTUgN2w0LTRIM3oiLz48L3N2Zz4=');
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 12px;
+}
+
+#sex:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.25);
 }
 
 .checkboxes {

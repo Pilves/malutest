@@ -127,7 +127,7 @@ document.addEventListener("DOMContentLoaded", function() {
       <label for="age">Vanus:</label>
       <input type="number" id="age" name="age" min="18" required><br><br>
       <label for="sex">Sugu:</label>
-      <select id="sex" name="sex" required>
+      <select type="sex" id="sex" name="sex" required>
         <option value="">Vali sugu</option>
         <option value="mees">Mees</option>
         <option value="naine">Naine</option>
