@@ -231,34 +231,52 @@ function createRecallTrial(instruction, background, textClass) {
         // Handle different responses (like "Soovin katsetunde" or "Lõpeta")
         if (data.response === 0) { // If "Soovin katsetunde" is clicked
           jsPsych.addNodeToEndOfTimeline({
-            type: 'survey-text',
-            questions: [{ prompt: "Sisestage oma nimi katsetundide saamiseks:", rows: 1, columns: 50 }],
-            on_finish: function() {
-              var lastTrialData = jsPsych.data.get().last(1).values()[0];
-              if (lastTrialData && lastTrialData.response && lastTrialData.response.Q0) {
-                var participantName = lastTrialData.response.Q0.trim();
-                document.getElementById('participantName').value = participantName;
-    
-                var currentDate = new Date();
-                var formattedDate = currentDate.toLocaleDateString('et-EE');
-    
+            type: 'survey-html-form',
+            preamble: '<p>Palun sisestage oma andmed katsetundide saamiseks:</p>',
+            html: `
+                  <div class="form-container">
+                    <div>
+                      <label for="firstname">Eesnimi:</label>
+                      <input type="text" id="firstname" name="firstname" required>
+                    </div>
+                    <div>
+                      <label for="lastname">Perekonnanimi:</label>
+                      <input type="text" id="lastname" name="lastname" required>
+                    </div>
+                    <div>
+                      <label for="email">E-post:</label>
+                      <input type="email" id="email" name="email" required>
+                    </div>
+                  </div>
+                `,
+            button_label: 'Jätka',
+            on_finish: function(formData) {
+              const responses = formData.response;
+              const firstName = responses.firstname.trim();
+              const lastName = responses.lastname.trim();
+              const email = responses.email.trim();
+
+              document.getElementById('participantName').value = firstName + ' ' + lastName;
+              document.getElementById('participantEmail').value = email;
+
+              var currentDate = new Date();
+              var formattedDate = currentDate.toLocaleDateString('et-EE');
+
+              document.getElementById('jspsych-experiment').innerHTML = `
+        <h2>Kinnitus</h2>
+        <p>Kinnitame, et <b>${firstName} ${lastName}</b> osales "Taustavärvi ja sõnade fondi mõju mälule" uuringus.</p>
+        <p>Katse toimumise kuupäev: <b>${formattedDate}</b></p>
+        <p>Osalejale on määratud 0,25 katsetundi.</p>
+        <button id="submit-button" style="margin-top: 20px; padding: 10px; font-size: 16px;">Lõpeta</button>
+      `;
+
+              document.getElementById('submit-button').addEventListener('click', function() {
                 document.getElementById('jspsych-experiment').innerHTML = `
-                  <h2>Kinnitus</h2>
-                  <p>Kinnitame, et <b>${participantName}</b> osales "Taustavärvi ja sõnade fondi mõju mälule"uuringus.</p>
-                  <p>Katse toimumise kuupäev: <b>${formattedDate}</b></p>
-                  <p>Osalejale on määratud 0,25 katsetundi.</p>
-                  <p>Palun esitage see kinnitus oma õppejõule katsetundide saamiseks.</p>
-                  <button id="submit-button" style="margin-top: 20px; padding: 10px; font-size: 16px;">Lõpeta</button>
-                `;
-    
-                document.getElementById('submit-button').addEventListener('click', function() {
-                  document.getElementById('jspsych-experiment').innerHTML = `
-                    <h2>Eksperiment on nüüd lõppenud</h2>
-                    <p>Palun oota kuni minut enne vahelehe sulgemist.</p>
-                  `;
-                  document.getElementById('dataForm').submit(); // Submit the form with hidden inputs
-                });
-              }
+          <h2>Eksperiment on nüüd lõppenud</h2>
+          <p>Palun oota kuni minut enne vahelehe sulgemist.</p>
+        `;
+                document.getElementById('dataForm').submit();
+              });
             }
           });
         } else { // If "Lõpeta" is clicked
@@ -307,6 +325,7 @@ function createRecallTrial(instruction, background, textClass) {
       display_element: 'jspsych-experiment',
       on_finish: function() {
         console.log('Experiment complete');
+        console.log(document.getElementById("dataForm"));
       }
     });
     
