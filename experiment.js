@@ -21,7 +21,7 @@ function createWordTrials(words, background, textClass) {
     type: 'html-keyboard-response',
     stimulus: `<p class="${textClass}">${word}</p>`,
     choices: jsPsych.NO_KEYS,
-    trial_duration: 2000,
+    trial_duration: 20,
     data: { word: word, bg: background, txtClass: textClass },
     on_start: function() {
       document.body.style.backgroundColor = background;
@@ -176,10 +176,10 @@ function createRecallTrial(instruction, background, textClass) {
 
   //shuffle stages
   const stages = [
-    { trials: stage1Trials, recall: stage1Recall, color: '#413DFF' },
-    { trials: stage2Trials, recall: stage2Recall, color: '#FF413D' },
-    { trials: stage3Trials, recall: stage3Recall, color: '#FF413D' },
-    { trials: stage4Trials, recall: stage4Recall, color: '#413DFF' }
+    { trials: stage1Trials, recall: stage1Recall, color: '#413DFF', type:"small-blue" },
+    { trials: stage2Trials, recall: stage2Recall, color: '#FF413D', type:"large-red" },
+    { trials: stage3Trials, recall: stage3Recall, color: '#FF413D', type:"small-red" },
+    { trials: stage4Trials, recall: stage4Recall, color: '#413DFF', type:"large-blue"}
   ];
   
   function selectStages(stages) {
@@ -194,6 +194,7 @@ function createRecallTrial(instruction, background, textClass) {
     return shuffled;
   }
   const shuffledStages = selectStages(stages);
+  const trialOrder= shuffledStages.map(stage => stage.type);
   while (shuffledStages.length > 0) {
     let currentStage = shuffledStages.splice(Math.floor(Math.random() * shuffledStages.length), 1)[0];
     timeline = timeline.concat(currentStage.trials);
@@ -313,7 +314,8 @@ function createRecallTrial(instruction, background, textClass) {
     
       return {
         demographic,
-        recallResponses: sortedRecallResponses.map(item => item.response)
+        recallResponses: sortedRecallResponses.map(item => item.response),
+        trialOrder: trialOrder
       };
     }
     
