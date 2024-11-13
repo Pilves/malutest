@@ -90,8 +90,6 @@ function createRecallTrial(instruction, background, textClass) {
     </div>
     
     <button class="select-all">Vali kõik</button>
-    <button class="start">Alusta</button>
-    
     `,
     choices: ['ALUSTA'],
     button_html: '<button disabled class="jspsych-btn">%choice%</button>',
