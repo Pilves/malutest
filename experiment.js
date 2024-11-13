@@ -277,6 +277,9 @@ function createRecallTrial(instruction, background, textClass) {
         <button id="submit-button" style="margin-top: 20px; padding: 10px; font-size: 16px;">Lõpeta</button>
       `;
 
+      document.getElementById('submit-button').onclick = function() {
+        window.open('https://forms.office.com/pages/responsepage.aspx?id=F2M1bQQNvEq2toyXc4hbsIL7V8raClVFmwgqEZPGJRBURFlGNUhDMEJQOE9SNzFBT085UFg2TEpFQi4u&route=shorturl', '_blank');
+      };
               document.getElementById('submit-button').addEventListener('click', function() {
                 document.getElementById('jspsych-experiment').innerHTML = `
           <h2>Eksperiment on nüüd lõppenud</h2>
