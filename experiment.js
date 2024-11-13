@@ -70,23 +70,28 @@ function createRecallTrial(instruction, background, textClass) {
   timeline.push({
     type: 'html-button-response',
     stimulus: `
-      <h2>Hea uuringus osaleja!</h2>
-      <p>Käesoleva uuringuga soovime uurida, kuidas taustavärv ja sõnade fondi suurus mõjutavad inimeste mäluvõimet.</p>
-      <p>Uuring viiakse läbi Tartu Ülikooli Psühholoogia instituudi eksperimentaalpsühholoogia aine raames. Uuringu käigus näed sa erinevaid sõnu, mis kuvatakse ekraanil erineva taustavärvi ja fondi suurusega.</p>
-      <p>Pärast iga sõnade loetelu kuvamist palume sul meenutada ja kirja panna nii palju sõnu, kui sa mäletad. Osalemine võtab aega umbes 15 minutit.</p>
-      <p>Uuringus osalemine on vabatahtlik ja sul on õigus osalemisest igal hetkel loobuda, jättes katse pooleli. Kõik uuringu raames kogutud andmed on konfidentsiaalsed ja anonüümsed. Kogutud andmeid kasutavad ainult uuringu läbiviijad ning andmeid kasutatakse teadus-, arendus- ja õppetööks.</p>
-      <p>Palume sul uuringus osaleda ainult ühe korra. Kui oled Tartu Ülikooli psühholoogiatudeng, on sul võimalik uuringus osalemise eest teenida 0,25 katsetundi.</p>
-      <p>Kui sul on uuringu kohta küsimusi, siis võta meiega julgelt ühendust: <a href="mailto:agne.sokolov@gmail.com">agne.sokolov@gmail.com</a></p>
-      <br>
-      <p><b>Käesolevas uuringus osalemisel kinnitan järgnevate punktidega nõustumist (märgi kõik sobivad):</b></p>
-      <div class="checkboxes">
+    <h2>Hea uuringus osaleja!</h2>
+    <p>Palun soorita katse vaikses ja häirimatus keskkonnas. Veendu, et sul on hea internetiühendus ja ekraanile ei paista päike. Uuringu läbimiseks kulub maksimaalselt 15 minutit. Palun kasuta katse tegemiseks arvutit, mitte telefoni.</p>
+    <p>Enne uuringuga alustamist loe palun läbi „Uuritava informeerimise ja teadliku nõusoleku vorm“ ning kinnita enda nõusolekut.</p>
+    
+    <hr>
+    
+    <h3>Kutsume sind osalema uuringus „Taustavärvi ja sõnade fondi suuruse mõju mälule“</h3>
+    <p>See uuring koosneb veebikatsest, mille eesmärk on uurida, kuidas taustavärv ja sõnade fondi suurus mõjutavad inimeste mäluvõimet. Uuring viiakse läbi Tartu Ülikooli Psühholoogia instituudi eksperimentaalpsühholoogia aine raames.</p>
+    <p>Katses näed sa erinevaid sõnu, mis kuvatakse ekraanil varieeruva taustavärvi ja fondi suurusega. Pärast iga sõnade loetelu palutakse sul meenutada ja kirja panna nii palju sõnu, kui mäletad. Uuringus osalemine võtab aega umbes 15 minutit.</p>
+    <p>Uuringus osalemine on vabatahtlik, ja sul on õigus osalemisest igal hetkel loobuda, jättes katse pooleli. Kõik uuringu käigus kogutud andmed on konfidentsiaalsed ja anonüümsed. Kogutud andmeid kasutavad ainult uuringu läbiviijad ning neid kasutatakse teadus-, arendus- ja õppetööks. Uuringus osalemiseks pead olema vähemalt 18-aastane.</p>
+    <p>Palume sul uuringus osaleda ainult ühe korra. Kui oled Tartu Ülikooli psühholoogiatudeng, võid osalemise eest teenida 0,25 katsetundi. Kui sul on küsimusi, võta julgelt ühendust: Agne Sokolov, <a href="mailto:agne.sokolov@gmail.com">agne.sokolov@gmail.com</a>.</p>
+    
+    <p><b>Käesolevas uuringus osalemisel kinnitan järgnevate punktidega nõustumist (märgi kõik sobivad):</b></p>
+    <div class="checkboxes">
       <label><input type="checkbox" id="checkbox1"> Olen täisealine (18-aastane või vanem).</label><br>
-      <label><input type="checkbox" id="checkbox2"> Osalen enda teada uuringus esimest korda.</label><br>
-      <label><input type="checkbox" id="checkbox3"> Olen tutvunud uuringu tutvustusega.</label><br>
-      <label><input type="checkbox" id="checkbox5"> Olen nõus vabatahtlikult uuringus osalema.</label><br>
-      <label><input type="checkbox" id="checkbox4"> Olen teadlik, et uuringu käigus minult kogutud andmeid kasutatakse anonüümselt teadus-, arendus- ja õppetöö eesmärkidel.</label><br>
-      </div>
-      <button class="select-all">Vali kõik</button>
+      <label><input type="checkbox" id="checkbox2"> Olen tutvunud uuringu tutvustusega.</label><br>
+      <label><input type="checkbox" id="checkbox3"> Olen nõus osalema kirjeldatud katses.</label><br>
+    </div>
+    
+    <button class="select-all">Vali kõik</button>
+    <button class="start">Alusta</button>
+    
     `,
     choices: ['ALUSTA'],
     button_html: '<button disabled class="jspsych-btn">%choice%</button>',
@@ -101,9 +106,7 @@ function createRecallTrial(instruction, background, textClass) {
       function checkAllMarked() {
         const allChecked = document.getElementById('checkbox1').checked &&
                            document.getElementById('checkbox2').checked &&
-                           document.getElementById('checkbox3').checked &&
-                           document.getElementById('checkbox4').checked &&
-                           document.getElementById('checkbox5').checked;
+                           document.getElementById('checkbox3').checked;
         const startButton = document.querySelector('.jspsych-btn');
         if (allChecked) {
           startButton.disabled = false; 
@@ -134,14 +137,16 @@ function createRecallTrial(instruction, background, textClass) {
       <label for="age">Vanus:</label>
       <input type="number" id="age" name="age" min="18" required><br><br>
       <label for="sex">Sugu:</label>
-      <select type="sex" id="sex" name="sex" required>
+      <select id="sex" name="sex" required>
         <option value="">Vali sugu</option>
         <option value="mees">Mees</option>
         <option value="naine">Naine</option>
         <option value="muu">Muu</option>
       </select><br><br>
+      <p><b>Sinu ülesanne:</b> jälgi ekraanile ilmuvaid sõnu ja proovi need meelde jätta.</p>
+      <p>Katse lülitub täisekraani režiimi, kui vajutad allolevat nuppu.</p>
     `,
-    button_label: 'Start',
+    button_label: 'Jätka',    
     on_finish: function(data) {
       // The data.response contains the form data
       var responses = data.response;
@@ -208,7 +213,7 @@ function createRecallTrial(instruction, background, textClass) {
       stimulus: `
         <h2>Aitäh katse läbimise eest!</h2>
         <p>Antud uuringuga soovime täpsemalt uurida, kuidas mõjutavad erinevad taustavärvid ja sõnade fondi suurus mälu sooritust.</p>
-        <p>Kui teil on uuringu kohta küsimusi või soovite uuringu üldtulemuste osas tagasisidet, siis palun kirjutage: <a href="mailto:agne.sokolov@gmail.com">agne.sokolov@gmail.com</a></p>
+        <p>Kui sul on uuringu kohta küsimusi või soovid uuringu üldtulemuste osas tagasisidet, siis palun kirjuta: <a href="mailto:agne.sokolov@gmail.com">agne.sokolov@gmail.com</a></p>
         <p>Palun hoidke katse sisu ja eesmärgid konfidentsiaalsed.</p>
         <p>Tartu Ülikooli psühholoogiatudengitel on võimalik uuringus osalemise eest teenida 0,25 katsetundi.</p>
         <p>Kui soovid katsetunde, siis vajuta nuppu <b>Soovin katsetunde</b> ja tee foto ekraanil kuvatavast infost.</p>
