@@ -10,10 +10,11 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
   //all words for the experiment
-  const words1 = shuffle(['Raamat', 'Tool', 'Jää', 'Joon', 'Kaart', 'Klaas', 'Õun', 'Sein', 'Teater', 'Lammas', 'Pastakas', 'Kivi', 'Lauk', 'Kuu', 'Lamp']);
-  const words2 = shuffle(['Jakk', 'Puu', 'Raadio', 'Aken', 'Järv', 'Ring', 'Leht', 'Raamat', 'Klaas', 'Ratas', 'Tänav', 'Loss', 'Kuningas', 'Sild', 'Kaste']);
-  const words3 = shuffle(['Kontor', 'Poiss', 'Lill', 'Auto', 'Tasku', 'Pall', 'Lint', 'Jõgi', 'Tüdruk', 'Aken', 'Kuju', 'Kork', 'Sõrmus', 'Sadam', 'Aed']);
-  const words4 = shuffle(['Kott', 'Maja', 'Arbuus', 'Pliiats', 'Kool', 'Paber', 'Saabas', 'Taim', 'Linn', 'Kardin', 'Käik', 'Aken', 'Redel', 'Rida', 'Põld']);
+  const words1 = shuffle(['raamat', 'tool', 'jää', 'joon', 'kaart', 'klaas', 'õun', 'sein', 'teater', 'lammas', 'pastakas', 'kivi', 'lauk', 'kuu', 'lamp']);
+  const words2 = shuffle(['jakk', 'puu', 'raadio', 'aken', 'järv', 'ring', 'leht', 'raamat', 'klaas', 'ratas', 'tänav', 'loss', 'kuningas', 'sild', 'kaste']);
+  const words3 = shuffle(['kontor', 'poiss', 'lill', 'auto', 'tasku', 'pall', 'lint', 'jõgi', 'tüdruk', 'aken', 'kuju', 'kork', 'sõrmus', 'sadam', 'aed']);
+  const words4 = shuffle(['kott', 'maja', 'arbuus', 'pliiats', 'kool', 'paber', 'saabas', 'taim', 'linn', 'kardin', 'käik', 'aken', 'redel', 'rida', 'põld']);
+  
 
 // Create trials for the experiment
 function createWordTrials(words, background, textClass) {
