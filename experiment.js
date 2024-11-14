@@ -124,7 +124,7 @@ function createRecallTrial(instruction, background, textClass) {
 
   //second page of the experiment
   timeline.push({
-    type: 'html-form',
+    type: 'survey-html-form',
     html: `
       <label for="age">Vanus:</label>
       <input type="number" id="age" name="age" min="18" required><br><br>
