@@ -124,8 +124,7 @@ function createRecallTrial(instruction, background, textClass) {
 
   //second page of the experiment
   timeline.push({
-    type: 'fullscreen',
-    fullscreen_mode: true,
+    type: 'html-form',
     html: `
       <label for="age">Vanus:</label>
       <input type="number" id="age" name="age" min="18" required><br><br>
@@ -156,11 +155,11 @@ function createRecallTrial(instruction, background, textClass) {
     }
   });
 
- /* //fullscreen mode
+  //fullscreen mode
   timeline.push({
     type: 'fullscreen',
     fullscreen_mode: true
-  }); */
+  }); 
 
   //create trials for the experiment
   var instruction = "Palun kirjuta 1.5 minuti jooksul üles kõik sõnad, mida sa just nägid. Sõnade vahele sisesta koma ja jätka tühikuta. Näide: koer,kass,maja";
