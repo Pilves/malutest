@@ -256,8 +256,8 @@ function createRecallTrial(instruction, background, textClass) {
     function processExperimentData() {
       // Retrieve the demographic data (age, sex) from the survey
       const demographic = {
-        age: jsPsych.data.get().filter({trial_type: 'survey-html-form'}).select('response').values[0]?.age,
-        sex: jsPsych.data.get().filter({trial_type: 'survey-html-form'}).select('response').values[0]?.sex
+        age: jsPsych.data.get().filter({trial_type: 'survey-fullscreen'}).select('response').values[0]?.age,
+        sex: jsPsych.data.get().filter({trial_type: 'survey-fullscreen'}).select('response').values[0]?.sex
       };
     
       // Sort recall responses based on background and text class

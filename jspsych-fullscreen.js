@@ -192,15 +192,18 @@ jsPsych.plugins['survey-fullscreen'] = (function() {
       display_element.innerHTML = '';
 
       jsPsych.pluginAPI.setTimeout(function() {
-        // Add the collected data to jsPsych's data set
-        if (data.age) {
-          jsPsych.data.addProperties({
+        const trial_data = {
+          response: {
             age: data.age,
             sex: data.sex
-          });
-        }
+          },
+          rt: performance.now(),
+          success: data.success,
+          fullscreen: data.fullscreen,
+          response_type: 'survey-fullscreen' 
+        };
 
-        jsPsych.finishTrial(data);
+        jsPsych.finishTrial(trial_data);
       }, trial.delay_after);
     }
   };
