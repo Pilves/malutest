@@ -22,7 +22,7 @@ function createWordTrials(words, background, textClass) {
     type: 'html-keyboard-response',
     stimulus: `<p class="${textClass}">${word}</p>`,
     choices: jsPsych.NO_KEYS,
-    trial_duration: 2000,
+    trial_duration: 20,
     data: { word: word, bg: background, txtClass: textClass },
     on_start: function() {
       document.body.style.backgroundColor = background;
@@ -122,50 +122,18 @@ function createRecallTrial(instruction, background, textClass) {
     }
   });
 
-  //second page of the experiment
+
   timeline.push({
-    type: 'survey-html-form',
+    type: 'survey-fullscreen',
     preamble: `
       <p>Olen nüüd valmis alustama katset, mis uurib, kuidas taustavärv ja sõnade fondi suurus mõjutavad mälu.</p>
       <p>Palun soorita katse vaikses ja häirimatus keskkonnas.<br>Veendu, et sul on hea internetiühendus ja ekraanile ei paista päike.<br>Palun kasuta katse tegemiseks arvutit, mitte telefoni.</p>
       <p><b>Sinu ülesanne:</b> jälgi ekraanile ilmuvaid sõnu ja proovi need meelde jätta.</p>
       <p>Enne alustamist palun sisesta oma vanus ja vali sugu.</p>
     `,
-    html: `
-      <label for="age">Vanus:</label>
-      <input type="number" id="age" name="age" min="18" required><br><br>
-      <label for="sex">Sugu:</label>
-      <select id="sex" name="sex" required>
-        <option value="">Vali sugu</option>
-        <option value="mees">Mees</option>
-        <option value="naine">Naine</option>
-        <option value="muu">Muu</option>
-      </select><br><br>
-      <p><b>Sinu ülesanne:</b> jälgi ekraanile ilmuvaid sõnu ja proovi need meelde jätta.</p>
-      <p>Katse lülitub täisekraani režiimi, kui vajutad allolevat nuppu.</p>
-    `,
-    button_label: 'Jätka',    
-    on_finish: function(data) {
-      // The data.response contains the form data
-      var responses = data.response;
-      
-      // Access the age and sex fields from the form responses
-      var age = responses['age'];
-      var sex = responses['sex'];
+    button_label: 'Jätka'
+});
 
-      // Store these details in the data set for later use
-      jsPsych.data.addProperties({
-        age: age,
-        sex: sex
-      });
-    }
-  });
-
-  //fullscreen mode
-  timeline.push({
-    type: 'fullscreen',
-    fullscreen_mode: true
-  });
 
   //create trials for the experiment
   var instruction = "Palun kirjuta 1.5 minuti jooksul üles kõik sõnad, mida sa just nägid. Sõnade vahele sisesta koma ja jätka tühikuta. Näide: koer,kass,maja";
@@ -206,96 +174,84 @@ function createRecallTrial(instruction, background, textClass) {
   }
 
 
-    var finalMessageTrial = {
-      type: 'html-button-response',
-      stimulus: `
-        <h2>Aitäh katse läbimise eest!</h2>
-        <p>Antud uuringuga soovime täpsemalt uurida, kuidas mõjutavad erinevad taustavärvid ja sõnade fondi suurus mälu sooritust.</p>
-        <p>Kui sul on uuringu kohta küsimusi või soovid uuringu üldtulemuste osas tagasisidet, siis palun kirjuta: <a href="mailto:agne.sokolov@gmail.com">agne.sokolov@gmail.com</a></p>
-        <p>Palun hoidke katse sisu ja eesmärgid konfidentsiaalsed.</p>
-        <p>Tartu Ülikooli psühholoogiatudengitel on võimalik uuringus osalemise eest teenida 0,25 katsetundi.</p>
-        <p>Kui soovid katsetunde, siis vajuta nuppu <b>Soovin katsetunde</b> ja tee foto ekraanil kuvatavast infost.</p>
-        <p>Kui ei soovi katsetunde, siis vajuta katse lõpetamiseks nuppu <b>Lõpeta</b>.</p>
-      `,
-      choices: ['Soovin katsetunde', 'Lõpeta'],
-      on_finish: function(data) {
-        // Exit full screen if enabled
-        if (document.fullscreenElement) {
-          document.exitFullscreen();
-        }
+  var finalMessageTrial = {
+    type: 'html-button-response',
+    stimulus: `
+      <h2>Aitäh katse läbimise eest!</h2>
+      <p>Antud uuringuga soovime täpsemalt uurida, kuidas mõjutavad erinevad taustavärvid ja sõnade fondi suurus mälu sooritust.</p>
+      <p>Kui sul on uuringu kohta küsimusi või soovid uuringu üldtulemuste osas tagasisidet, siis palun kirjuta: <a href="mailto:agne.sokolov@gmail.com">agne.sokolov@gmail.com</a></p>
+      <p>Palun hoidke katse sisu ja eesmärgid konfidentsiaalsed.</p>
+      <p>Tartu Ülikooli psühholoogiatudengitel on võimalik uuringus osalemise eest teenida 0,25 katsetundi.</p>
+      <p>Kui soovid katsetunde, siis vajuta nuppu <b>Soovin katsetunde</b>.</p>
+      <p>Kui ei soovi katsetunde, siis vajuta katse lõpetamiseks nuppu <b>Lõpeta</b>.</p>
+    `,
+    choices: ['Soovin katsetunde', 'Lõpeta'],
+    on_finish: function(data) {
+      // Exit full screen if enabled
+      if (document.fullscreenElement) {
+        document.exitFullscreen();
+      }
 
-        // Process experiment data and prepare for form submission
-        const finalData = processExperimentData();
+      // Process experiment data and prepare for form submission
+      const finalData = processExperimentData();
 
-        // Convert finalData to JSON format
-        const jsonData = JSON.stringify(finalData, null, 2);
+      // Convert finalData to JSON format
+      const jsonData = JSON.stringify(finalData, null, 2);
 
-        // Set the hidden input field values in the form for submission
-        document.getElementById('dataInput').value = jsonData;
-    
-        // Handle different responses (like "Soovin katsetunde" or "Lõpeta")
-        if (data.response === 0) { // If "Soovin katsetunde" is clicked
-          jsPsych.addNodeToEndOfTimeline({
-            type: 'survey-html-form',
-            preamble: '<p>Palun sisestage oma andmed katsetundide saamiseks:</p>',
-            html: `
-                  <div class="form-container">
-                    <div>
-                      <label for="firstname">Eesnimi:</label>
-                      <input type="text" id="firstname" name="firstname" required>
-                    </div>
-                    <div>
-                      <label for="lastname">Perekonnanimi:</label>
-                      <input type="text" id="lastname" name="lastname" required>
-                    </div>
-                    <div>
-                      <label for="email">E-post:</label>
-                      <input type="email" id="email" name="email" required>
-                    </div>
+      // Set the hidden input field values in the form for submission
+      document.getElementById('dataInput').value = jsonData;
+  
+      // Handle different responses (like "Soovin katsetunde" or "Lõpeta")
+      if (data.response === 0) { // If "Soovin katsetunde" is clicked
+        jsPsych.addNodeToEndOfTimeline({
+          type: 'survey-html-form',
+          preamble: '<p>Palun sisestage oma andmed katsetundide saamiseks:</p>',
+          html: `
+                <div class="form-container">
+                  <div>
+                    <label for="firstname">Eesnimi:</label>
+                    <input type="text" id="firstname" name="firstname" required>
                   </div>
-                `,
-            button_label: 'Jätka',
-            on_finish: function(formData) {
-              const responses = formData.response;
-              const firstName = responses.firstname.trim();
-              const lastName = responses.lastname.trim();
-              const email = responses.email.trim();
-
-              document.getElementById('participantName').value = firstName + ' ' + lastName;
-              document.getElementById('participantEmail').value = email;
-
-              var currentDate = new Date();
-              var formattedDate = currentDate.toLocaleDateString('et-EE');
-
-              document.getElementById('jspsych-experiment').innerHTML = `
-        <h2>Kinnitus</h2>
-        <p>Kinnitame, et <b>${firstName} ${lastName}</b> osales "Taustavärvi ja sõnade fondi mõju mälule" uuringus.</p>
-        <p>Katse toimumise kuupäev: <b>${formattedDate}</b></p>
-        <p>Osalejale on määratud 0,25 katsetundi.</p>
-        <button id="submit-button" style="margin-top: 20px; padding: 10px; font-size: 16px;">Lõpeta</button>
-      `;
-
-      document.getElementById('submit-button').onclick = function() {
-        window.open('https://forms.office.com/pages/responsepage.aspx?id=F2M1bQQNvEq2toyXc4hbsIL7V8raClVFmwgqEZPGJRBURFlGNUhDMEJQOE9SNzFBT085UFg2TEpFQi4u&route=shorturl', '_blank');
-      };
-              document.getElementById('submit-button').addEventListener('click', function() {
-                document.getElementById('jspsych-experiment').innerHTML = `
+                  <div>
+                    <label for="lastname">Perekonnanimi:</label>
+                    <input type="text" id="lastname" name="lastname" required>
+                  </div>
+                  <div>
+                    <label for="email">Meiliaadress:</label>
+                    <input type="email" id="email" name="email" required>
+                  </div>
+                </div>
+              `,
+          button_label: 'Jätka',
+          on_finish: function(formData) {
+            const responses = formData.response;
+            const firstName = responses.firstname.trim();
+            const lastName = responses.lastname.trim();
+            const email = responses.email.trim();
+        
+            document.getElementById('participantName').value = firstName + ' ' + lastName;
+            document.getElementById('participantEmail').value = email;
+        
+            // Open the form link
+            window.open('https://forms.office.com/pages/responsepage.aspx?id=F2M1bQQNvEq2toyXc4hbsIL7V8raClVFmwgqEZPGJRBURFlGNUhDMEJQOE9SNzFBT085UFg2TEpFQi4u&route=shorturl', '_blank');
+        
+            // Show completion message and submit data
+            document.getElementById('jspsych-experiment').innerHTML = `
+                <h2>Eksperiment on nüüd lõppenud</h2>
+                <p>Palun oota kuni minut enne vahelehe sulgemist.</p>
+            `;
+            document.getElementById('dataForm').submit();
+          }
+        });
+      } else { // If "Lõpeta" is clicked
+        document.getElementById('jspsych-experiment').innerHTML = `
           <h2>Eksperiment on nüüd lõppenud</h2>
           <p>Palun oota kuni minut enne vahelehe sulgemist.</p>
         `;
-                document.getElementById('dataForm').submit();
-              });
-            }
-          });
-        } else { // If "Lõpeta" is clicked
-          document.getElementById('jspsych-experiment').innerHTML = `
-            <h2>Eksperiment on nüüd lõppenud</h2>
-            <p>Palun oota kuni minut enne vahelehe sulgemist.</p>
-          `;
-          document.getElementById('dataForm').submit(); // Submit the form with hidden inputs
-        }
+        document.getElementById('dataForm').submit(); // Submit the form with hidden inputs
       }
-    };
+    }
+  };
     
     function processExperimentData() {
       // Retrieve the demographic data (age, sex) from the survey
@@ -326,6 +282,12 @@ function createRecallTrial(instruction, background, textClass) {
       };
     }
     
+    timeline.push({
+      type: 'survey-fullscreen',
+      fullscreen_mode: false,
+      preamble: '',
+      button_label: 'Lõpeta'
+  });
     timeline.push(finalMessageTrial);
 
 
