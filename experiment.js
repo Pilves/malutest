@@ -126,10 +126,6 @@ function createRecallTrial(instruction, background, textClass) {
   timeline.push({
     type: 'survey-fullscreen',
     preamble: `
-      <p>Olen nüüd valmis alustama katset, mis uurib, kuidas taustavärv ja sõnade fondi suurus mõjutavad mälu.</p>
-      <p>Palun soorita katse vaikses ja häirimatus keskkonnas.<br>Veendu, et sul on hea internetiühendus ja ekraanile ei paista päike.<br>Palun kasuta katse tegemiseks arvutit, mitte telefoni.</p>
-      <p><b>Sinu ülesanne:</b> jälgi ekraanile ilmuvaid sõnu ja proovi need meelde jätta.</p>
-      <p>Enne alustamist palun sisesta oma vanus ja vali sugu.</p>
     `,
     button_label: 'Jätka'
 });
