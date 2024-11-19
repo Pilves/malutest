@@ -65,6 +65,7 @@ jsPsych.plugins['survey-fullscreen'] = (function() {
       var html = `
         ${trial.preamble}
         <form id="jspsych-survey-form">
+        <p><b>Palun sisesta oma vanus ja vali sugu.</b></p>
           <label for="age">Vanus:</label>
           <input type="number" id="age" name="age" min="18" required><br><br>
           <label for="sex">Sugu:</label>
