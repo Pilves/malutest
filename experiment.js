@@ -76,7 +76,7 @@ function createRecallTrial(instruction, background, textClass) {
     
     <hr>
     
-    <h3> <span style="font-weight:normal">Kutsume sind osalema uuringus </span>"Taustavärvi ja sõnade fondi suuruse mõju mälule"</h3>
+    <h3> <span style="font-weight:normal">Kutsume sind osalema uuringus </span><br>"Taustavärvi ja sõnade fondi suuruse mõju mälule"</h3>
     <p>See uuring koosneb veebikatsest, mille raames soorime uurida, kuidas taustavärv ja sõnade fondi suurus mõjutavad inimeste mäluvõimet. Uuring viiakse läbi Tartu Ülikooli Psühholoogia instituudi eksperimentaalpsühholoogia aine raames.</p>
     <p>Katses näed sa erinevaid sõnu, mis kuvatakse ekraanil varieeruva taustavärvi ja fondi suurusega. Pärast iga sõnade loetelu palutakse sul meenutada ja kirja panna nii palju sõnu, kui mäletad. Uuringus osalemine võtab aega umbes 15 minutit.</p>
     <p><b>Uuringus osalemine on vabatahtlik, ja sul on õigus osalemisest igal hetkel loobuda, jättes katse pooleli</b>. Kõik uuringu käigus kogutud andmed on konfidentsiaalsed ja anonüümsed. Kogutud andmeid kasutavad ainult uuringu läbiviijad ning neid kasutatakse teadus-, arendus- ja õppetööks. Uuringus osalemiseks pead olema vähemalt 18-aastane.</p>
